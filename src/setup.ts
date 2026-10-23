@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { writeLocalApiKey, LOCAL_ENV_FILE } from "./local-store.js";
 import { fubRequest } from "./http.js";
 
@@ -98,10 +99,10 @@ export async function runSetup(opts: { local?: boolean } = {}): Promise<void> {
       "`fub-mcp setup` (the private key-entry popup) is macOS-only.\n\n" +
         "On Windows, Linux, or any other OS:\n" +
         "  - Claude Desktop: install the one-click extension instead (no Terminal needed):\n" +
-        "    https://github.com/gray-wilbee/fub-mcp/releases/latest/download/fub-mcp.mcpb\n" +
-        "  - Claude Code: claude mcp add fub-mcp --env FUB_API_KEY=<your key> -- npx -y fub-mcp\n" +
+        "    https://github.com/wilbee-inelegant/fub-mcp/releases\n" +
+        "  - Other clients: use protected secret settings; never put the key in CLI arguments.\n" +
         "  - Any other MCP client: set FUB_API_KEY in the server's env config.\n" +
-        "Full instructions: https://github.com/gray-wilbee/fub-mcp#install"
+        "Full instructions: https://github.com/wilbee-inelegant/fub-mcp#install"
     );
     process.exitCode = 1;
     return;
@@ -141,9 +142,9 @@ export async function runSetup(opts: { local?: boolean } = {}): Promise<void> {
     const serverEntry = opts.local
       ? {
           command: process.execPath, // this Node binary, for reproducible dev testing
-          args: [path.join(path.dirname(new URL(import.meta.url).pathname), "index.js")],
+          args: [path.join(path.dirname(fileURLToPath(import.meta.url)), "index.js")],
         }
-      : { command: "npx", args: ["-y", "fub-mcp"] };
+      : { command: "npx", args: ["-y", "fub-mcp@0.3.0"] };
     const configResult = mergeClaudeConfig(serverEntry, { overwrite: opts.local });
 
     macAlert(

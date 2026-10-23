@@ -13,7 +13,6 @@
     "claude-setup",
     "README.md",
     "docs",
-    "gpt",
     "PRIVACY.md",
     "CHANGELOG.md",
     "SECURITY.md",
@@ -21,14 +20,16 @@
     "third-party-licenses.json"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "node scripts/build.mjs",
     "start": "node dist/index.js",
-    "dev": "tsc -p tsconfig.json --watch",
+    "dev": "node scripts/watch.mjs",
     "inspect": "npx --yes @modelcontextprotocol/inspector@2.12.0 node dist/index.js",
     "test": "npm run build && node --test --test-concurrency=1 tests/*.test.mjs",
     "check:release": "node scripts/check-release.mjs",
     "build:mcpb": "bash scripts/build-mcpb.sh",
-    "check:licenses": "node scripts/check-licenses.mjs"
+    "check:licenses": "node scripts/check-licenses.mjs",
+    "check:generated": "node scripts/check-generated.mjs",
+    "check:package": "node scripts/check-package.mjs"
   },
   "keywords": [
     "mcp",

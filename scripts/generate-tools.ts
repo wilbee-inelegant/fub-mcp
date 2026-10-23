@@ -1,5 +1,4 @@
-import spec from "./fub-openapi.json" with { type: "json" };
-import { ParamMeta, ToolDef } from "../types.js";
+import type { ParamMeta, ToolDef } from "../src/types.js";
 
 interface OpenApiParameter {
   name: string;
@@ -204,7 +203,7 @@ function buildDescription(
   return parts.join(" ");
 }
 
-export function generateTools(): ToolDef[] {
+export function generateTools(spec: { paths: Record<string, Record<string, OpenApiOperation>> }): ToolDef[] {
   const tools: ToolDef[] = [];
   const paths = (spec as { paths: Record<string, Record<string, OpenApiOperation>> })
     .paths;

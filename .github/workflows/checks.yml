@@ -21,5 +21,7 @@ jobs:
       - run: npm run check:licenses
       - run: npm test
       - run: npm run check:release
+      - run: npm run check:generated
+      - run: npm run check:package
       - run: npm pack --dry-run --ignore-scripts
       - run: npm audit

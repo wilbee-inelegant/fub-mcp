@@ -12,7 +12,7 @@ for(const [key,env] of [['allow_write','FUB_MCP_ALLOW_WRITE'],['allow_delete','F
  assert.equal(manifest.server.mcp_config.env[env],'${user_config.'+key+'}');
 }
 for(const key of ['api_key','system_key'])assert.equal(manifest.user_config[key].sensitive,true);
-for(const file of ['LICENSE','README.md','PRIVACY.md','CHANGELOG.md','SECURITY.md','docs/INSTALLATION.md','docs/SECURITY-GUIDE.md','docs/DIGITALOCEAN.md','docs/RELEASE.md'])assert.ok(fs.existsSync(file),file);
+for(const file of ['LICENSE','THIRD_PARTY_NOTICES.md','third-party-licenses.json','docs/DESKTOP-QA.md','docs/RELEASE-CHECKLIST.md','README.md','PRIVACY.md','CHANGELOG.md','SECURITY.md','docs/INSTALLATION.md','docs/SECURITY-GUIDE.md','docs/DIGITALOCEAN.md','docs/RELEASE.md'])assert.ok(fs.existsSync(file),file);
 for(const name of Object.keys(pkg.dependencies))assert.equal(lock.packages[`node_modules/${name}`].version,pkg.dependencies[name]);
 
 assert.equal(manifest.compatibility.runtimes.node,pkg.engines.node);

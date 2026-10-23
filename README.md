@@ -143,5 +143,6 @@ and [security reporting policy](SECURITY.md).
 
 ## License
 
-[MIT](LICENSE). Review upstream API terms and required third-party notices before
-redistribution. This project and its security review are not vendor certification.
+[MIT](LICENSE) for original project code. See [third-party notices and the specific
+FUB schema redistribution blocker](THIRD_PARTY_NOTICES.md) before public release.
+This project and its security review are not vendor certification.

@@ -43,7 +43,7 @@ own-copy approach is the one that works today.)*
 
 In the Action's settings, set the **Privacy Policy** URL to:
 ```
-https://github.com/gray-wilbee/fub-mcp/blob/main/PRIVACY.md
+https://github.com/wilbee-inelegant/fub-mcp/blob/main/PRIVACY.md
 ```
 
 ## 5. Test it

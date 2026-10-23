@@ -16,11 +16,11 @@
 ## Steps
 
 1. **Download the file.** Give them this link and ask them to click it:
-   https://github.com/gray-wilbee/fub-mcp/releases/latest/download/fub-mcp.mcpb
-   It saves a file called `fub-mcp.mcpb`, usually into their Downloads folder.
+   https://github.com/wilbee-inelegant/fub-mcp/releases
+   Choose the reviewed versioned `fub-mcp-VERSION.mcpb` asset and check its checksum. Version 0.3.0 introduces the access modes below; older releases do not have them. During private staging, a maintainer must provide the reviewed bundle; do not claim a public download exists.
 2. **Install it from inside Claude Desktop.** Ask them to open Claude Desktop, go to
    **Settings → Extensions → Advanced settings → Install Extension…**, and choose the
-   downloaded `fub-mcp.mcpb` (it's in their Downloads folder). Dragging the file onto
+   downloaded `fub-mcp-VERSION.mcpb` (it's in their Downloads folder). Dragging the file onto
    the Claude Desktop window also works. **Don't tell them to double-click it** —
    that works on some computers but on Windows it offers Notepad or Media Player
    instead of Claude. If such an "Open with" window ever appears, tell them to cancel
@@ -33,7 +33,7 @@
    tell them to leave those blank for now. If Claude
    Desktop warns the extension is unsigned or from an unverified developer, that's
    expected — it's an independent, open-source project
-   (https://github.com/gray-wilbee/fub-mcp); let them decide whether to continue.
+   (https://github.com/wilbee-inelegant/fub-mcp); let them decide whether to continue.
 4. **Turn it on.** Installing does *not* switch it on. Ask them to open Claude Desktop
    **Settings → Extensions**, find **Follow Up Boss**, and turn the toggle **on**.
    This is the step people miss.
@@ -46,8 +46,10 @@ the fix is to open the extension's settings and re-enter the key.
 
 ## Optional — only if they ask about rate limits, "registering," or heavy use
 
-Follow Up Boss lets each customer register their own "system" for a higher request
-rate. Don't bring this up unprompted. If they ask:
+Follow Up Boss system registration identifies an integration and affects rate limits.
+Registration is required when providing services to customers; follow FUB's current
+[identification requirements](https://docs.followupboss.com/reference/identification).
+For applicable registration:
 
 1. Send them to https://apps.followupboss.com/system-registration to fill in the form
    themselves (a system name, a "System ID Header" of their choosing, and their name,
@@ -63,8 +65,7 @@ rate. Don't bring this up unprompted. If they ask:
 
 ## Good to know (mention only if they ask)
 
-- Their key is stored in their computer's secure keychain and is only ever sent
-  directly to Follow Up Boss.
+- The extension marks key fields as sensitive for the host's secret storage. The server authenticates directly to Follow Up Boss.
 - Viewing only is the default. To change records, enable **View and update records** in extension settings, restart it, and open a new chat. Deletes, webhooks and direct workflow triggers have separate advanced settings.
 - It works in Claude Desktop only (not claude.ai in a browser, and not the phone app).
 

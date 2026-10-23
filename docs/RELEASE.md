@@ -5,6 +5,13 @@ the GitHub candidate. A draft PR or a passing
 mock test run is not a stable release. Nothing in these instructions changes an
 installed instance or grants its agent write access.
 
+The canonical repository is `wilbee-inelegant/fub-mcp`, currently private for
+staging. The authenticated GitHub CLI clone below requires access to it. Public
+open-source release is a separate owner decision: make source, security reporting
+and download links accessible before announcing or publishing the public release.
+Changing GitHub ownership does not change npm package ownership. The old personal
+repository PR is not the company release candidate.
+
 ## What changes for users
 
 The default is **View information**. To enable ordinary create/update operations,
@@ -17,7 +24,7 @@ Tell existing users about this default change before they update.
 ## Review and merge first
 
 1. Review the GitHub PR, code, tests, dependency lock and documentation. Confirm the
-   base repository is `gray-wilbee/fub-mcp` and record the final merged commit SHA.
+   base repository is `wilbee-inelegant/fub-mcp` and record the final merged commit SHA.
    Resolve any checks that failed or did not run; do not equate an absent CI run
    with a passing one.
 2. Freshly test extension installation on Mac and Windows with disposable credentials
@@ -40,7 +47,7 @@ is recommended. Package metadata accepts Node 22.16+, 24 and 26. Python 3 is nee
 only to build the desktop ZIP bundle.
 
 ```sh
-git clone https://github.com/gray-wilbee/fub-mcp.git fub-mcp-release
+gh repo clone wilbee-inelegant/fub-mcp fub-mcp-release
 cd fub-mcp-release
 git checkout --detach MERGED_COMMIT_SHA
 git status --short

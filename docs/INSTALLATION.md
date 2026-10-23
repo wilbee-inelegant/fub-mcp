@@ -19,7 +19,9 @@ anonymous bridge carrying an owner's CRM key.
 ## Source installation for a stdio host
 
 Use Git and a supported Node.js LTS runtime; Node 24 is the baseline for new installs.
-The reviewed build was tested with Node 26.7.0, not a full supported-runtime matrix.
+The CI workflow tests Node 22.16.0, 24 and 26 on Linux and Windows. Check the
+actual results for the commit you install; configured jobs alone are not evidence
+of a passing matrix. Local review testing used macOS arm64 and Node 26.7.0.
 Supported runtime lines are Node 22.16+, 24 and 26.
 
 1. Clone the repository and choose a maintainer-reviewed immutable release tag or
@@ -27,7 +29,7 @@ Supported runtime lines are Node 22.16+, 24 and 26.
    reviewed. Do not install an unmerged candidate as a stable release:
 
    ```sh
-   git clone https://github.com/gray-wilbee/fub-mcp.git
+   git clone https://github.com/wilbee-inelegant/fub-mcp.git
    cd fub-mcp
    git checkout --detach REVIEWED_REF
    npm ci --ignore-scripts

@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gray-wilbee/fub-mcp"
+    "url": "https://github.com/wilbee-inelegant/fub-mcp"
   },
-  "homepage": "https://github.com/gray-wilbee/fub-mcp",
-  "documentation": "https://github.com/gray-wilbee/fub-mcp#readme",
-  "support": "https://github.com/gray-wilbee/fub-mcp/issues",
+  "homepage": "https://github.com/wilbee-inelegant/fub-mcp",
+  "documentation": "https://github.com/wilbee-inelegant/fub-mcp#readme",
+  "support": "https://github.com/wilbee-inelegant/fub-mcp/issues",
   "license": "MIT",
   "keywords": [
     "followupboss",
@@ -47,21 +47,21 @@
     "api_key": {
       "type": "string",
       "title": "Follow Up Boss API Key",
-      "description": "Your personal API key. In Follow Up Boss, go to Admin > API and copy it. It is stored in your computer's secure keychain and is never sent anywhere except directly to Follow Up Boss.",
+      "description": "Your personal API key. Find it in Follow Up Boss under Admin > API and paste it only into this sensitive field, never into chat. The host manages secret storage; this server authenticates directly to Follow Up Boss.",
       "sensitive": true,
       "required": true
     },
     "system_name": {
       "type": "string",
       "title": "(Optional) Your registered system ID",
-      "description": "Leave blank unless you registered your own system with Follow Up Boss (recommended for heavy use; see the README). This is the 'System ID Header' you chose when registering.",
+      "description": "Your registered Follow Up Boss System ID Header, if applicable. Registration is required when providing services to customers; see the README.",
       "sensitive": false,
       "required": false
     },
     "system_key": {
       "type": "string",
       "title": "(Optional) Your system key",
-      "description": "Leave blank unless you registered your own system. This is a secret: paste it only here, never into a chat or email. Stored in your system keychain.",
+      "description": "Your registered system key, if applicable. Paste it only into this sensitive field, never into chat or email. The host manages secret storage.",
       "sensitive": true,
       "required": false
     },
@@ -106,7 +106,7 @@
       "win32"
     ],
     "runtimes": {
-      "node": ">=22.16.0"
+      "node": "^22.16.0 || ^24.0.0 || ^26.0.0"
     }
   }
 }

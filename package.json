@@ -50,10 +50,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gray-wilbee/fub-mcp.git"
+    "url": "git+https://github.com/wilbee-inelegant/fub-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/gray-wilbee/fub-mcp/issues"
+    "url": "https://github.com/wilbee-inelegant/fub-mcp/issues"
   },
-  "homepage": "https://github.com/gray-wilbee/fub-mcp#readme"
+  "homepage": "https://github.com/wilbee-inelegant/fub-mcp#readme"
 }

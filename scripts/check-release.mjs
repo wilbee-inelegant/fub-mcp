@@ -14,4 +14,8 @@ for(const [key,env] of [['allow_write','FUB_MCP_ALLOW_WRITE'],['allow_delete','F
 for(const key of ['api_key','system_key'])assert.equal(manifest.user_config[key].sensitive,true);
 for(const file of ['LICENSE','README.md','PRIVACY.md','CHANGELOG.md','SECURITY.md','docs/INSTALLATION.md','docs/SECURITY-GUIDE.md','docs/DIGITALOCEAN.md','docs/RELEASE.md'])assert.ok(fs.existsSync(file),file);
 for(const name of Object.keys(pkg.dependencies))assert.equal(lock.packages[`node_modules/${name}`].version,pkg.dependencies[name]);
+
+assert.equal(manifest.compatibility.runtimes.node,pkg.engines.node);
+assert.equal(pkg.repository.url,'git+https://github.com/wilbee-inelegant/fub-mcp.git');
+assert.equal(manifest.repository.url,'https://github.com/wilbee-inelegant/fub-mcp');
 console.log(`Release ${pkg.version}: versions, entrypoint, safe UI defaults, secret fields and required docs verified.`);

@@ -16,10 +16,14 @@ provider. This project does not run a hosted backend.
 
 ## Install
 
+The canonical repository is `wilbee-inelegant/fub-mcp`. During private staging,
+GitHub links require repository access and no public 0.3.0 release is promised.
+Maintainers can build the reviewed commit using the [release guide](docs/RELEASE.md).
+
 ### Claude Desktop: no Terminal required
 
 1. Download `fub-mcp-VERSION.mcpb` from the chosen
-   [GitHub release](https://github.com/gray-wilbee/fub-mcp/releases). Check the
+   [GitHub release](https://github.com/wilbee-inelegant/fub-mcp/releases). Check the
    release version and checksum. Version 0.3.0 is the first release with access modes;
    do not assume an older bundle has them.
 2. In Claude Desktop, open **Settings → Extensions → Advanced settings → Install

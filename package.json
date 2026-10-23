@@ -16,7 +16,9 @@
     "gpt",
     "PRIVACY.md",
     "CHANGELOG.md",
-    "SECURITY.md"
+    "SECURITY.md",
+    "THIRD_PARTY_NOTICES.md",
+    "third-party-licenses.json"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -25,7 +27,8 @@
     "inspect": "npx --yes @modelcontextprotocol/inspector@2.12.0 node dist/index.js",
     "test": "npm run build && node --test --test-concurrency=1 tests/*.test.mjs",
     "check:release": "node scripts/check-release.mjs",
-    "build:mcpb": "bash scripts/build-mcpb.sh"
+    "build:mcpb": "bash scripts/build-mcpb.sh",
+    "check:licenses": "node scripts/check-licenses.mjs"
   },
   "keywords": [
     "mcp",

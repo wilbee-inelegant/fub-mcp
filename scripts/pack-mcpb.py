@@ -23,7 +23,7 @@ with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
 with zipfile.ZipFile(output) as archive:
     assert archive.testzip() is None
     names = archive.namelist()
-    assert 'LICENSE' in names and 'docs/SECURITY-GUIDE.md' in names
+    assert all(name in names for name in ['LICENSE', 'THIRD_PARTY_NOTICES.md', 'third-party-licenses.json', 'docs/SECURITY-GUIDE.md'])
 checksum = hashlib.sha256(output.read_bytes()).hexdigest()
 Path(str(output) + '.sha256').write_text(f'{checksum}  {output.name}\n')
 print(f'Created unsigned {output} ({len(files)} files); wrote SHA-256 checksum.')

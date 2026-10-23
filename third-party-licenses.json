@@ -1108,7 +1108,7 @@
     {
       "location": "node_modules/zod",
       "name": "zod",
-      "version": "4.6.5",
+      "version": "4.6.7",
       "license": "MIT",
       "notices": [
         {

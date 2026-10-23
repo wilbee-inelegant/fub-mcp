@@ -36,36 +36,30 @@ intentional dependency update, review the new upstream files, then regenerate wi
 `node scripts/check-licenses.mjs --write` and commit the reviewed inventory. A new
 license family requires explicit review and an update to the checker.
 
-## FUB OpenAPI descriptions: unresolved release blocker
+## FUB API source and generated runtime definitions
 
-These files contain upstream API descriptions:
+Source provenance: FUB's [OpenAPI download page](https://docs.followupboss.com/openapi)
+and [published JSON](https://docs.followupboss.com/openapi/58b53c341065f9c438aa1f7e).
+The repository retains `src/openapi/fub-openapi.json` as a build input and
+`gpt/openapi-gpt-actions.json` as a separate modified GPT Actions resource.
 
-- `src/openapi/fub-openapi.json` (copied into `dist/openapi/fub-openapi.json`).
-- `gpt/openapi-gpt-actions.json` (a modified subset).
+The npm and desktop archives exclude both full JSON files, all GPT assets, the
+source generator and temporary build files. They include only
+`dist/generated/tool-defs.json`: generated tool names, HTTP methods, endpoint paths,
+parameter locations/defaults, input validation schemas and useful tool/parameter
+descriptions. These descriptions and schema annotations remain derived from the
+source documentation. Global OpenAPI metadata and response schemas/examples are
+not copied into the runtime table. This is not a renamed or embedded full spec.
 
-Both JSON `info` objects lack a license declaration. Repository history identifies
-the source as FUB's published API description, but records no explicit redistribution
-grant or written permission. Public documentation access is not evidence of such a
-grant. Both archives currently include these descriptions.
+The root project license does not purport to relicense upstream material. Missing
+license metadata alone does not establish a release prohibition or a permission
+requirement. The earlier checklist's blanket permission gate overstated what the
+packaging review could establish; it is removed. Neither generation nor excluding
+full source files is legal clearance. Repository source copies remain a separate
+distribution decision. This review records provenance and actual contents without
+making a legal determination.
 
-The official [API Terms of Use](https://docs.followupboss.com/reference/fub-api-tou)
-sections 2(q) and 9 address copying and ownership. The [Terms of Service](https://www.followupboss.com/legal-pages/terms-of-service)
-sections 3.2 and 5.1 address copying and documentation rights. We did not establish
-an express license covering redistribution of the vendored JSON and modified subset.
-
-Before public source/package/bundle release, the maintainer must obtain written FUB
-permission covering both files and modifications, or document another sufficient
-rights basis after qualified review. Ask what attribution/license text is required,
-and retain that evidence. A notice added by this project cannot grant those rights.
-Do not simply label the upstream files MIT, strip their attribution, or silently
-remove the runtime schema: tool generation depends on it. Contact details are on
-FUB's [getting-started page](https://docs.followupboss.com/reference/getting-started).
-No permission request has been sent by this review.
-
-## API use and registration are separate
-
-Follow the official [registration guidance](https://docs.followupboss.com/reference/identification)
-and API terms for the intended deployment, including system registration and keeping
-system credentials private. API access approval does not by itself settle schema
-redistribution rights. Confirm the intended assistant/provider data handling and
-any hosted/service offering with FUB when resolving the permission question.
+API use and registration remain subject to the official
+[API terms](https://docs.followupboss.com/reference/fub-api-tou) and
+[registration guidance](https://docs.followupboss.com/reference/identification).
+No vendor approval or endorsement is claimed.

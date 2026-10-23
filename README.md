@@ -76,7 +76,7 @@ Use a supported Node release (22.16+, 24 or 26; Node 24 is the guide's baseline)
 - See the dated [platform notes](docs/INSTALLATION.md#platform-status) for Dot,
   Grok Bot, Muse and Claude Duet. These are documented capabilities, not tested
   installation claims.
-- [Custom GPT Actions](gpt/SETUP.md) are a separate integration. They call FUB directly
+- [Custom GPT Actions](https://github.com/wilbee-inelegant/fub-mcp/blob/main/gpt/SETUP.md) are a separate integration. They call FUB directly
   and **do not use this server's access-mode or safety controls**. Keep configured GPTs
   private and assess their permissions separately.
 
@@ -101,8 +101,11 @@ separate from customer API keys and never distribute either.
 
 ## What is included
 
-Tools are generated at startup from the vendored FUB OpenAPI description, with
-small overrides for undocumented notes listing and API behavior. In version 0.3.0:
+The build generates 156 API tool definitions from the source OpenAPI input; the
+runtime loads that table and adds one hand-written notes tool plus API overrides.
+The full source spec, generator and separate GPT Actions assets are excluded from
+npm and desktop packages. Useful descriptions and input-schema annotations remain
+source-derived. See [build and packaging](docs/BUILD.md). In version 0.3.0:
 
 - **70 GET tools** in View information mode.
 - **126 tools** with ordinary writes enabled, while advanced opt-ins stay off.
@@ -133,6 +136,8 @@ Review those workflows against the access mode you selected.
 npm ci --ignore-scripts
 npm test
 npm run check:release
+npm run check:generated
+npm run check:package
 npm pack --dry-run --ignore-scripts
 ```
 
@@ -143,6 +148,6 @@ and [security reporting policy](SECURITY.md).
 
 ## License
 
-[MIT](LICENSE) for original project code. See [third-party notices and the specific
-FUB schema redistribution blocker](THIRD_PARTY_NOTICES.md) before public release.
+[MIT](LICENSE) for original project code. See [third-party notices and distribution
+scope](THIRD_PARTY_NOTICES.md) for dependencies and source-derived runtime definitions.
 This project and its security review are not vendor certification.

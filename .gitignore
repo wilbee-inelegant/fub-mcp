@@ -8,3 +8,6 @@ dist/
 
 *.tgz
 *.mcpb.sha256
+
+.build/
+src/generated/

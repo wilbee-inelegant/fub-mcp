@@ -2,6 +2,11 @@
 
 ## 0.3.0 — security hardening (release candidate)
 
+- Update the locked Zod dependency to 4.6.7 for GHSA-mrhx-c7xc-m3w5.
+- Generate API tool definitions during the build. npm and MCPB packages omit full
+  OpenAPI specifications, GPT Actions assets and build-only generator code. Tool
+  behavior and useful descriptions are preserved; runtime permissions stay enforced.
+
 ### Migration from 0.2.x
 
 - **Default behavior changes:** viewing only. To restore ordinary create/update

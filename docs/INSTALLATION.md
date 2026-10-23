@@ -10,7 +10,7 @@ These instructions describe version 0.3.0. Platform documentation was checked on
 | Desktop/CLI stdio | On the machine running the MCP client | Implemented; client starts the child process |
 | Always-on stdio | On a private VM running both the agent and this process | Same transport; requires an agent that supports spawning stdio children |
 | Remote HTTPS MCP | On a server, with client-facing authentication | Not implemented; no HTTP listener, OAuth server, or remote bearer-token verifier |
-| Custom GPT Actions | Key stored in the GPT configuration; OpenAI calls FUB directly | Separate OpenAPI integration under `gpt/`, not this MCP process |
+| Custom GPT Actions | Key stored in the GPT configuration; OpenAI calls FUB directly | Separate repository-only integration under `gpt/`; excluded from MCP packages |
 
 A background `node dist/index.js` process on its own is not a remote endpoint.
 Neither a reverse proxy nor a firewall converts stdio into HTTP. Do not expose an

@@ -1,6 +1,6 @@
 import { accessError, validateWebhook } from "./policy.js";
 import { validateInput } from "./validation.js";
-import { generateTools } from "./openapi/generate-tools.js";
+import generatedTools from "./generated/tool-defs.json" with { type: "json" };
 import {
   extraTools,
   descriptionAppendix,
@@ -81,7 +81,8 @@ const SEND_CONFIRM_NOTICE =
   "or communication effects. Caller confirmation is not independent human authorization.";
 
 export function buildToolDefs(config: FubConfig): ToolDef[] {
-  const all = [...generateTools(), ...extraTools];
+  // Fresh copies keep runtime overrides and mode selection from mutating the table.
+  const all = [...structuredClone(generatedTools as unknown as ToolDef[]), ...structuredClone(extraTools)];
 
   for (const tool of all) {
     tool.requiresConfirm = tool.method !== "GET";

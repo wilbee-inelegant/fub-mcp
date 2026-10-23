@@ -1,16 +1,18 @@
 # 0.3.0 release checklist
 
 Canonical repository: `wilbee-inelegant/fub-mcp`, private during staging.
-The security baseline is merged at `f80356a305206593f69a82e561282731b8d0824c`.
-The release candidate also includes [company PR #2](https://github.com/wilbee-inelegant/fub-mcp/pull/2).
+The previous security/notices baseline is `4bc7e5b5de619a382c672841372fb029bbfbea80`.
+The release candidate also includes [company PR #3](https://github.com/wilbee-inelegant/fub-mcp/pull/3).
 The commands below resolve that PR's immutable merge commit and check out that exact
 SHA. They fail the length check while it is unmerged; never substitute a moving branch.
 
 ## Complete before public release
 
-- [ ] Resolve the specific FUB schema redistribution question in
-  [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md). Dependency license files are
-  present; no generic dependency-license review remains open for the locked tree.
+Dependency notices and package-content checks are automated below. See
+[distribution scope](../THIRD_PARTY_NOTICES.md): source specs stay in GitHub;
+packages contain only generated runtime definitions, including source-derived
+useful descriptions. The checks do not make a legal determination.
+
 - [ ] Complete the [fresh desktop GUI checklist](DESKTOP-QA.md) on isolated Mac and
   Windows profiles before claiming desktop compatibility or releasing its bundle.
 - [ ] Owner chooses public repository visibility and verifies source/download and
@@ -27,7 +29,7 @@ Compare the printed SHA with the final maintainer handoff.
 ```sh
 gh repo clone wilbee-inelegant/fub-mcp fub-mcp-release-0.3.0
 cd fub-mcp-release-0.3.0
-MERGED_COMMIT_SHA="$(gh pr view 2 --repo wilbee-inelegant/fub-mcp --json mergeCommit --jq '.mergeCommit.oid')"
+MERGED_COMMIT_SHA="$(gh pr view 3 --repo wilbee-inelegant/fub-mcp --json mergeCommit --jq '.mergeCommit.oid')"
 test "${#MERGED_COMMIT_SHA}" -eq 40
 printf '%s\n' "$MERGED_COMMIT_SHA"
 git checkout --detach "$MERGED_COMMIT_SHA"
@@ -36,6 +38,8 @@ npm ci --ignore-scripts
 npm test
 npm run check:release
 npm run check:licenses
+npm run check:generated
+npm run check:package
 npm audit
 npm pack --dry-run --ignore-scripts
 npm pack --ignore-scripts

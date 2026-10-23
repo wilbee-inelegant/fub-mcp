@@ -8,8 +8,9 @@ npm run build
 STAGE=$(mktemp -d "${TMPDIR:-/tmp}/fub-mcp-build.XXXXXX")
 trap 'rm -rf "$STAGE"' EXIT
 cp mcpb/manifest.json "$STAGE/manifest.json"
-cp -R dist docs gpt skills claude-setup "$STAGE/"
+cp -R dist docs skills claude-setup "$STAGE/"
 cp package.json package-lock.json LICENSE README.md PRIVACY.md CHANGELOG.md SECURITY.md THIRD_PARTY_NOTICES.md third-party-licenses.json "$STAGE/"
 (cd "$STAGE" && npm ci --omit=dev --ignore-scripts --no-audit --no-fund)
 node scripts/check-licenses.mjs "$STAGE"
+node scripts/check-package.mjs --stage "$STAGE"
 python3 scripts/pack-mcpb.py "$STAGE"

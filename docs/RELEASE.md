@@ -13,7 +13,7 @@ Changing GitHub ownership does not change npm package ownership. The old persona
 repository PR is not the company release candidate.
 
 Start with the [concise release checklist](RELEASE-CHECKLIST.md). The concrete
-redistribution finding and dependency evidence are in
+distribution scope and dependency evidence are in
 [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md).
 
 ## What changes for users
@@ -34,10 +34,10 @@ Tell existing users about this default change before they update.
 2. Follow [fresh desktop GUI QA](DESKTOP-QA.md) using isolated OS profiles and a
    synthetic key. It requires no live FUB request. Installing into the existing
    profile can replace the live extension; that requires separate approval.
-3. Resolve the documented FUB schema redistribution blocker in
-   [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md). All 94 locked production
-   installations retain upstream license files; run `npm run check:licenses` to
-   verify their hashes. This project cannot grant a license to the upstream schema.
+3. Verify dependency notices and artifact exclusions with `npm run check:licenses`,
+   `npm run check:generated` and `npm run check:package`. See
+   [distribution scope](../THIRD_PARTY_NOTICES.md). Full source specs remain in the
+   repository but are not shipped; runtime descriptions remain source-derived.
 4. Verify the repository's private security reporting channel, release permissions,
    publisher authentication and supported-version policy. Do not invent a contact
    address or expose credentials in an issue. Account settings require owner action.
@@ -59,6 +59,8 @@ npm ci --ignore-scripts
 npm test
 npm run check:release
 npm run check:licenses
+npm run check:generated
+npm run check:package
 npm audit
 npm pack --dry-run --ignore-scripts
 npm pack --ignore-scripts
@@ -81,9 +83,11 @@ not already published; a successful result means stop and choose a new version
 rather than attempting to overwrite it. Confirm your npm account/package ownership
 with `npm whoami` in your own terminal. Never paste tokens or authentication codes
 into chat. Review every tarball path: it should contain dist, skills, setup guides,
-docs, GPT resources, README, LICENSE, THIRD_PARTY_NOTICES, third-party-licenses.json,
+docs, README, LICENSE, THIRD_PARTY_NOTICES, third-party-licenses.json,
 PRIVACY, CHANGELOG, SECURITY and package metadata;
-no `.env`, logs, keys, real CRM data or private review inputs.
+no `.env`, logs, keys, real CRM data or private review inputs. Also reject full
+OpenAPI/GPT specs, `gpt/`, build scripts and stale `dist/openapi/` files. The generated
+`dist/generated/tool-defs.json` is required at runtime.
 
 **Only the owner, after those checks, runs:**
 

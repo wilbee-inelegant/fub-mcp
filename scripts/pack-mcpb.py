@@ -23,6 +23,10 @@ with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
 with zipfile.ZipFile(output) as archive:
     assert archive.testzip() is None
     names = archive.namelist()
+    assert 'dist/generated/tool-defs.json' in names
+    for name in names:
+        assert not name.startswith(('src/', 'scripts/', '.build/', 'gpt/', 'dist/openapi/'))
+        assert Path(name).name not in ('fub-openapi.json', 'openapi-gpt-actions.json', 'generate-tools.js', 'generate-tools.ts')
     assert all(name in names for name in ['LICENSE', 'THIRD_PARTY_NOTICES.md', 'third-party-licenses.json', 'docs/SECURITY-GUIDE.md'])
 checksum = hashlib.sha256(output.read_bytes()).hexdigest()
 Path(str(output) + '.sha256').write_text(f'{checksum}  {output.name}\n')

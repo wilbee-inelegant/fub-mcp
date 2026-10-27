@@ -1,6 +1,6 @@
 # Third-party material and redistribution status
 
-Reviewed 2026-10-23 against the actual 0.3.0 npm tarball and unsigned MCPB archive.
+Reviewed 2026-10-27 against the actual 0.3.0 npm tarball and unsigned MCPB archive.
 This records evidence and outstanding permission questions, not legal certification.
 The project's [MIT license](LICENSE) covers its original code; it does not relicense
 third-party material.
@@ -21,7 +21,7 @@ text. Full dependency trees are retained, including their source notices. The
 review found no separate NOTICE/COPYING files that needed adding.
 
 Examples include `@modelcontextprotocol/sdk` 1.32.1 (MIT), `ajv` 8.20.0 (MIT),
-`fast-uri` 3.1.8 and `qs` 6.16.0 (BSD-3-Clause), and `json-schema-typed` 8.0.2
+`fast-uri` 3.1.9 and `qs` 6.16.1 (BSD-3-Clause), and `json-schema-typed` 8.0.2
 (BSD-2-Clause, including its JSON Schema attribution).
 
 The npm tarball contains this project's compiled JavaScript and schemas, not a

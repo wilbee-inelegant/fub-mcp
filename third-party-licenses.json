@@ -64,7 +64,7 @@
     {
       "location": "node_modules/body-parser",
       "name": "body-parser",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "license": "MIT",
       "notices": [
         {
@@ -376,7 +376,7 @@
     {
       "location": "node_modules/fast-uri",
       "name": "fast-uri",
-      "version": "3.1.8",
+      "version": "3.1.9",
       "license": "BSD-3-Clause",
       "notices": [
         {
@@ -832,7 +832,7 @@
     {
       "location": "node_modules/qs",
       "name": "qs",
-      "version": "6.16.0",
+      "version": "6.16.1",
       "license": "BSD-3-Clause",
       "notices": [
         {

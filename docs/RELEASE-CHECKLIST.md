@@ -1,5 +1,10 @@
 # 0.3.0 release checklist
 
+**Pending dependency refresh (October 27):** the PR #3 commit pinned below predates
+the body-parser, fast-uri and qs fixes now on the local remediation branch. Before
+publication, commit/review that refresh, run CI, and replace the pinned PR/commit
+below with its verified merge. Do not publish the older baseline using these commands.
+
 Canonical repository: `wilbee-inelegant/fub-mcp`, private during staging.
 The previous security/notices baseline is `4bc7e5b5de619a382c672841372fb029bbfbea80`.
 The release candidate also includes [company PR #3](https://github.com/wilbee-inelegant/fub-mcp/pull/3).

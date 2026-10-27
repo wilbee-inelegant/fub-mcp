@@ -2,6 +2,9 @@
 
 ## 0.3.0 — security hardening (release candidate)
 
+- Refresh locked production dependencies: body-parser 2.4.0, fast-uri 3.1.9 and
+  qs 6.16.1 address advisories reported by the October 27 release preflight.
+
 - Update the locked Zod dependency to 4.6.7 for GHSA-mrhx-c7xc-m3w5.
 - Generate API tool definitions during the build. npm and MCPB packages omit full
   OpenAPI specifications, GPT Actions assets and build-only generator code. Tool

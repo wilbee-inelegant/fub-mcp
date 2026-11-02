@@ -74,8 +74,10 @@ Use a supported Node release (22.16+, 24 or 26; Node 24 is the guide's baseline)
 - A cloud product requiring an HTTPS MCP URL needs transport and authentication
   code that this repository **does not provide**. A reverse proxy alone is insufficient.
 - See the dated [platform notes](docs/INSTALLATION.md#platform-status) for Dot,
-  Grok Bot, Muse and Claude Duet. These are documented capabilities, not tested
-  installation claims.
+  Grok Bot, Muse and Claude Duet. The [Grok Command-mode setup and recovery
+  instructions](docs/INSTALLATION.md#grok-command-mode-observed-setup-and-recovery)
+  include a scoped, owner-reported test; other platform notes remain
+  documentation-based assessments, not installation certifications.
 - [Custom GPT Actions](https://github.com/wilbee-inelegant/fub-mcp/blob/main/gpt/SETUP.md) are a separate integration. They call FUB directly
   and **do not use this server's access-mode or safety controls**. Keep configured GPTs
   private and assess their permissions separately.

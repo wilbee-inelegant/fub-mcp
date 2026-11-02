@@ -109,11 +109,29 @@ const TEXTING_COMPLIANCE_NOTE =
   "than a shortened link, since shorteners are more likely to get carrier-filtered.";
 
 const ACTION_PLANS_DEPRECATED_NOTE =
-  " ⚠️ Action Plans are a deprecated FUB feature — Automations are the current, " +
-  "recommended mechanism going forward. Unless the user specifically names an " +
-  "existing legacy Action Plan they already rely on, prefer the automationsPerson " +
-  "tools (create_automations_person to trigger one, update_automations_person to " +
-  "pause/unpause) over this one for new workflows.";
+  " FUB documents planned deprecation of Action Plans endpoints as part of the " +
+  "Automations 2.0 rollout, with no date set. Do not assume this account has migrated " +
+  "or that Automations 2.0 API access is available. Preserve existing workflows " +
+  "unless the user authorizes a separately assessed migration.";
+
+const STAGE_FIELDS_NOTE =
+  " This tool does not expose a stage description field. The documented stage " +
+  "write fields are name and orderWeight; do not offer to write descriptions " +
+  "through this MCP or an invented extraBody field. FUB Help documents account-owner " +
+  "description editing in Admin > Stages > Edit > Update Stage; that is a manual UI " +
+  "fallback, not an operation performed by this tool. See " +
+  "https://help.followupboss.com/hc/en-us/articles/4402370671767-Custom-Stages.";
+
+const AUTOMATIONS_ACCESS_NOTE =
+  " FUB documents this endpoint for Automations 2.0 accounts and registered systems " +
+  "only. Tool availability does not establish API/account access. GET requests do " +
+  "not require FUB_MCP_ALLOW_AUTOMATIONS. Preserve the sanitized tool error and HTTP " +
+  "status as returned; do not request or expose upstream response bodies or secrets. " +
+  "A returned FUB HTTP 403 is an upstream refusal, not a local mutation-gate failure; " +
+  "do not infer a specific account, plan, or credential cause or enable mutation " +
+  "gates to fix a read. The published response " +
+  "schema does not specify workflow definition fields; inspect actual returned data " +
+  "before claiming trigger, condition, or action coverage.";
 
 /**
  * Per-tool description/behavior patches applied on top of the generated
@@ -122,6 +140,27 @@ const ACTION_PLANS_DEPRECATED_NOTE =
  * endpoints are fine as generated.
  */
 export const descriptionAppendix: Record<string, string> = {
+  create_stage: STAGE_FIELDS_NOTE,
+  update_stage: STAGE_FIELDS_NOTE,
+  list_stages:
+    " Stage descriptions are not documented or guaranteed response fields; live " +
+    "availability is unverified. Successful JSON responses pass through additional " +
+    "fields if present. Preserve any returned description as observed evidence; " +
+    "a missing description is unknown, not evidence that it is blank.",
+  get_stage:
+    " Stage descriptions are not documented or guaranteed response fields; live " +
+    "availability is unverified. Successful JSON responses pass through additional " +
+    "fields if present. Preserve any returned description as observed evidence; " +
+    "a missing description is unknown, not evidence that it is blank.",
+  list_smart_lists:
+    " Use all=true to include both classic and current-UI Smart Lists, and paginate " +
+    "before claiming a complete inventory. Documented responses expose metadata, " +
+    "not filter definitions. Names/counts cannot establish stage dependencies.",
+  get_smart_list:
+    " The documented response is id/name metadata, not filter definitions. Do not " +
+    "promise this call reveals filters or certifies stage-dependency coverage.",
+  list_automations: AUTOMATIONS_ACCESS_NOTE,
+  get_automation: AUTOMATIONS_ACCESS_NOTE,
   update_person:
     " Tag removal has no dedicated endpoint: to remove a tag, first GET this person, " +
     "filter the tag out of their current `tags` array yourself, then PUT the full " +
@@ -205,7 +244,12 @@ export const descriptionAppendix: Record<string, string> = {
   create_action_plans_person: ACTION_PLANS_DEPRECATED_NOTE,
   update_action_plans_person: ACTION_PLANS_DEPRECATED_NOTE,
   list_action_plans_people: ACTION_PLANS_DEPRECATED_NOTE,
-  list_action_plans: ACTION_PLANS_DEPRECATED_NOTE,
+  list_action_plans:
+    ACTION_PLANS_DEPRECATED_NOTE +
+    " This is an inventory endpoint with documented id/name/status/timestamps, " +
+    "not action steps or trigger definitions. There is no get_action_plan tool " +
+    "in this MCP. IDs can filter this list but do not add definition coverage. " +
+    "Action-plan/person relationships are execution state, not plan definitions.",
 };
 
 /**

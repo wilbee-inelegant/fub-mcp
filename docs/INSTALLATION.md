@@ -147,7 +147,86 @@ No destructive host reset test is required or recommended to repeat these checks
    Stop and relaunch the actual connector child as described below, then perform
    only an owner-authorized small GET/identity check. Confirm the intended account
    privately and report only pass/fail, not identity or CRM payloads. Keep the gates
-   above off. Do not run `setup --local` or create a `.env` fallback for this route.
+   above off during this initial test. Once it passes, the owner can choose ongoing
+   normal updates below. Do not run `setup --local` or create a `.env` fallback for
+   this route.
+
+### Ready for everyday use? Enable normal updates once
+
+Start with the read-only test above. When you are satisfied that the assistant is
+connected to the correct account, you can leave **normal updates enabled** for
+ongoing work: creating/updating tasks, marking completed tasks complete, adding
+notes, and maintaining contact/lead records. You do not need to turn the server's
+write setting on briefly for every action and off again afterward. It stays your
+chosen operating mode until you change it; this is not a promise that settings
+survive a host reset.
+
+For a nontechnical handoff, tell your assistant:
+
+> **Enable normal updates.** Explain what this enables and ask me to approve leaving
+> that capability on for ongoing task and contact upkeep. Keep permanent deletes,
+> webhook changes, and direct automation triggers off. After I approve, update the
+> connector setting, genuinely restart its MCP process, and verify the available
+> tools. Do not make a CRM change just to test the setting. Keep following my
+> instructions and approval rules for the actual actions.
+
+This is a suggested assistant request, **not a verified Grok button or built-in
+command**. The exact Grok GUI flow and write-enable transition have not been
+live-tested in the reported setup. An assistant needs authorized access to the
+actual host configuration; if unavailable, it should guide the owner or explain
+what is blocked, not claim the setting changed.
+
+For the assistant/operator:
+
+1. Explain the scope once and obtain explicit approval to keep normal write
+   **capability** enabled. This setting is broader than tasks and contacts: it
+   exposes other non-GET operations too, including stage-definition changes,
+   reassignments and communication-related records/templates. For example, the
+   included `POST /textMessages` records an externally sent text; it is **not** an
+   SMS-sending endpoint. Do not infer a tool's effect from its name. Review sharing
+   and use the least-privileged FUB identity suitable for the intended work.
+2. After approval, save these nonsecret flags in this connector's configuration:
+
+   ```json
+   {
+     "FUB_MCP_ALLOW_WRITE": "1",
+     "FUB_MCP_ALLOW_DELETE": "0",
+     "FUB_MCP_ALLOW_WEBHOOKS": "0",
+     "FUB_MCP_ALLOW_AUTOMATIONS": "0"
+   }
+   ```
+
+   The flag is `FUB_MCP_ALLOW_WRITE` (singular). Do not change the API key, Node
+   path, secret-inheritance route or other connectors. Advanced gates need their
+   own separate authorization; normal-update approval does not enable them.
+3. Follow the real-process restart checks below, then refresh tool discovery.
+   Version 0.3.0 should expose **126 tools** with normal updates on and all three
+   advanced gates off, including task and person update operations. Verify the
+   selected configuration and tool list, not merely a UI toggle or old session.
+   Tool discovery verifies capability, not a successful live write; no gratuitous
+   CRM mutation is needed. If the count or gates differ, diagnose before use.
+4. Record the approved operating mode in the nonsecret recovery record. Leave it
+   enabled for authorized everyday work; do not add repeated server toggles or
+   capability-approval prompts to every task. To return to read-only mode, set
+   `FUB_MCP_ALLOW_WRITE` to `"0"`, genuinely restart, and verify the 70 GET tools.
+
+**Capability is not blanket permission to act.** A direct request to complete a
+specific task or make a specific record change may already provide the needed
+action approval; do not ask the same question again unnecessarily. Follow the
+user's applicable preferences, host approvals, safety requirements and each tool's
+confirmation instructions. Version 0.3.0 still requires `confirm: true` for every
+non-GET call; its schemas require explicit confirmation of the specific change and
+any recipients/content or workflow effects. Enabling writes alone does not meet
+that requirement. Do not weaken or bypass it, and do not treat a broad upkeep goal
+as approval for unspecified changes. Ask when scope or authorization is missing.
+
+Communications, bulk changes, reassignments, changes to shared stage definitions,
+and other consequential actions need their relevant scope and effects resolved
+before execution. Verify the intended records and result; check uncertain outcomes
+before retrying. Advanced gates being off does not block every consequential
+ordinary update or prevent existing FUB business rules from reacting. This guide
+changes neither server defaults nor tool safeguards, and does not authorize any
+current connector-setting change or live CRM operation merely by being read.
 
 ### Verify a real process restart
 
@@ -161,9 +240,11 @@ A button click or new chat alone is not proof of a fresh environment.
   manager; never kill unrelated Node processes or reset the whole computer.
 - Verify the old child exited and a new process/start time appeared using the exact
   intended Node and entry-point paths. PID alone may be reused.
-- Recheck presence-only secret inheritance, the 70-GET-tool listing, all four gates
-  off, and the authorized minimal identity/read check in the new process. Never
-  test a forbidden write against live CRM just to prove the gate works.
+- Recheck presence-only secret inheritance and the selected operating mode: 70 GET
+  tools with all four gates off for initial/read-only use, or 126 tools with only
+  normal writes on after explicit approval. Keep the other three gates off. Repeat
+  the authorized minimal identity/read check in the new process. Never test a
+  forbidden write against live CRM just to prove the gate works.
 - If the actual child cannot be identified or restarted safely, stop here and ask
   the host operator for help. Do not claim the secret change took effect.
 
@@ -192,14 +273,19 @@ was **not tested**; neither storage persistence nor automatic recovery is promis
 Do not reset a working host merely to test persistence.
 
 1. Keep a **nonsecret** recovery record outside the disposable host: reviewed commit,
-   runtime version, absolute paths, four disabled gates, and these instructions.
+   runtime version, absolute paths, approved normal-write mode, three disabled
+   advanced gates, and these instructions. Record read-only mode if normal updates
+   were never approved.
 2. After a disruption, check the exact Node binary/version, checkout commit and
    built entry point. If anything is missing, restore a reviewed separate Node
    runtime and a fresh checkout at the pinned commit, then repeat the build and
    offline checks above without runtime secrets. Do not overwrite local changes
    or use destructive cleanup commands.
-3. Recheck the connector's absolute paths and disabled gates. Have the owner verify
-   that the protected secret entry exists, without revealing it. If absent, pause
+3. Recheck the connector's absolute paths and the recorded, still-authorized mode.
+   Restore normal writes only if that ongoing approval remains clear and applicable;
+   otherwise use read-only mode and ask before enabling them. Keep the three advanced
+   gates off. Have the owner verify that the protected secret entry exists, without
+   revealing it. If absent, pause
    for the owner to enter it privately; never recover a key from chat, logs, source
    files or another bot. Do not rotate/change credentials as an automatic repair.
 4. Verify a genuinely new MCP process, secret presence, tool listing and an
@@ -208,6 +294,11 @@ Do not reset a working host merely to test persistence.
    missing component. A passing process restart is not a passing host-reset test.
 
 ## Access modes
+
+Read-only is the initial setup/test mode, not a requirement to toggle writes around
+every action. After explicit approval, normal updates can remain enabled for
+ongoing authorized work; see [Enable normal updates once](#ready-for-everyday-use-enable-normal-updates-once).
+Capability approval and action-specific authorization are distinct.
 
 | What you want | Claude Desktop setting | Environment settings |
 |---|---|---|

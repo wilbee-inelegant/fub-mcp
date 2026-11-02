@@ -40,9 +40,15 @@ provide Node 22.16 or later in a supported release line. The 0.3.0 settings chan
 still require a fresh Mac/Windows GUI installation check before a stable release;
 previous-version GUI tests do not establish compatibility for this version.
 
-### Enable updates when you want them
+### Enable normal updates for ongoing work
 
-In **Settings → Extensions → Follow Up Boss**, turn on **View and update records**,
+Start with the read-only connection test. When ready, explicitly approve leaving
+normal updates enabled for everyday task and contact upkeep. You do not need to
+turn writes on and off for each action. Grok users can follow the plain-language
+[Enable normal updates](docs/INSTALLATION.md#ready-for-everyday-use-enable-normal-updates-once)
+handoff; its exact GUI flow has not been live-tested.
+
+In Claude Desktop **Settings → Extensions → Follow Up Boss**, turn on **View and update records**,
 then restart the extension and open a new chat. You can now create and update records,
 including notes and tasks. Turn it off and restart to return to viewing only.
 
@@ -60,7 +66,12 @@ and direct workflow triggers require their own opt-ins. Webhooks also need an
 approved hostname. See [access modes](docs/INSTALLATION.md#access-modes).
 Every non-GET call requires `confirm: true`, but this caller-supplied flag is not proof
 of human approval; use your host's independent approval controls. Ordinary record
-updates can also activate your existing FUB business rules.
+updates can also activate your existing FUB business rules. Normal updates enable
+more than task/contact upkeep; capability approval is not blanket approval for all
+exposed operations. Follow the user's action-specific authorization, host approvals
+and tool confirmation instructions, especially for communications or high-impact
+changes. A clear request for a specific action need not be asked again simply
+because the server remains write-enabled.
 
 ### Other local clients and always-on agents
 
